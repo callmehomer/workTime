@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="background.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400" rel="stylesheet">
+</head>
+
+<body>
+    <section class="timer-body">
+        <h3>You working at:</h3>
+        <h3 id="currentTask"></h3>
+        <div class="timer-body__time">
+            <h2 id="clock">00:00:00</h2>
+        </div>
+        <div class="timer-body__control">
+            <input type="text" placeholder="Task name" id="taskName">
+            <button onclick="addTask();" id="setTaskBtn">Start task</button>
+        </div>
+        <div class="timer-body__control">
+            <!-- <button id="run_btn" onclick="onTimerStart();">></button> -->
+            <button onclick="saveTask();">Save current task</button>
+        </div>
+        <section class="tasks-list">
+            <h3>Task you've done today:</h3>
+            <ul id="tasksList"></ul>
+        </section>
+    </section>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+<script src="app.js"></script>
+
+</html>
