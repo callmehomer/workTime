@@ -13,7 +13,7 @@
 
 <body>
     <section class="timer-body">
-        <h3>You working at:</h3>
+        <h3>You are working on:</h3>
         <h3 id="currentTask"></h3>
         <div class="timer-body__time">
             <h2 id="clock">00:00:00</h2>
@@ -24,13 +24,14 @@
         </div>
         <div class="timer-body__control">
             <!-- <button id="run_btn" onclick="onTimerStart();">></button> -->
-            <button onclick="saveTask();">Save current task</button>
+            <button id="saveTask" onclick="saveTask();" disabled>Save current task</button>
         </div>
         <section class="tasks-list">
             <h3>Task you've done today:</h3>
             <ul id="tasksList"></ul>
         </section>
     </section>
+    <button class="clearBtn" onclick="clearData();">clear tasks</button>
 
 </body>
 

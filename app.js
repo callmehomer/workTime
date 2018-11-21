@@ -9,11 +9,12 @@ var clockObj = document.getElementById('clock');
 var runBtn = document.getElementById('run_btn');
 var taskNameInput = document.getElementById('taskName');
 var taskList = document.getElementById('tasksList');
-
+var saveTaskBtn = document.getElementById('saveTask');
 
 //app objects and arrays
-var taskCollections = [];
-function singleTask(taskName, taskTime){
+var taskCollection = [];
+
+function singleTask(taskName, taskTime) {
     this.taskName = taskName;
     this.taskTime = taskTime;
 }
@@ -22,7 +23,17 @@ document.addEventListener('DOMContentLoaded', function () {
     if (currentTask.innerHTML == '') {
         currentTask.innerHTML = 'No current task';
     }
+    if (localStorage.getItem('taskCollection') != null) {
 
+        console.log(JSON.parse(localStorage.getItem('taskCollection')));
+        taskCollection = JSON.parse(localStorage.getItem('taskCollection'));
+        for (var i = 0; i < taskCollection.length; i++) {
+            var node = document.createElement("li");
+            var textNode = document.createTextNode(taskCollection[i].taskName + " " + taskCollection[i].taskTime);
+            node.appendChild(textNode);
+            taskList.appendChild(node);
+        }
+    }
 
 }, false);
 
@@ -80,6 +91,7 @@ function addTask() {
         taskNameInput.value = '';
 
         isTaskSet = true;
+        saveTaskBtn.disabled = false;
     }
     //stopped, but setted
     else if (isTaskSet && isTimerRunning) {
@@ -96,12 +108,13 @@ function addTask() {
 function saveTask() {
     //reset off the fileds and saves task name and task time to cookie or ls
     var taskToSave = new singleTask(currentTask.innerHTML, clockObj.innerHTML)
-    taskCollections.push(taskToSave);
+    taskCollection.push(taskToSave);
 
     var node = document.createElement("li");
     var textNode = document.createTextNode(currentTask.innerHTML + " " + clockObj.innerHTML);
     node.appendChild(textNode);
     taskList.appendChild(node);
+    localStorage.setItem('taskCollection', JSON.stringify(taskCollection));
 
     //reset fields to default
     currentTask.innerHTML = 'No current task';
@@ -119,27 +132,13 @@ function saveTask() {
     isTaskSet = false;
     clockObj.innerHTML = '00' + ':' + '00' + ':' + '00';
 
+    saveTaskBtn.disabled = true;
+
     console.log(taskToSave);
-    console.log(taskCollections);
+    console.log(taskCollection);
 }
 
-
-// else if() {
-//     singleTask.taskName = taskNameInput.value;
-//     singleTask.taskTime = clockObj.innerHTML;
-
-//     //reset fields to default
-//     currentTask.innerHTML = 'No current task';
-
-//     setTaskBtn.innerHTML = 'Set task';
-
-//     taskNameInput.disabled = false;
-//     taskNameInput.value = '';
-//     taskNameInput.placeholder = 'Task name';
-//     taskNameInput.classList.remove('input__blocked');
-
-//     isTaskSet = false;
-
-
-//     console.log(singleTask);
-// }
+function clearData(){
+    localStorage.removeItem('taskCollection');
+    location.reload();
+}
