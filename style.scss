@@ -20,6 +20,9 @@ body {
 h2 {
     margin: 0;
     font-size: 100px;
+    @media screen and (max-width: 480px){
+        font-size: 70px;
+    }
 }
 
 .timer-body {
@@ -34,6 +37,9 @@ h2 {
         border: 1px solid #ffffff7a;
         padding: 16px;
         margin-bottom: 10px;
+        @media screen and (max-width: 480px){
+            width: 320px;
+        }
     }
 }
 
